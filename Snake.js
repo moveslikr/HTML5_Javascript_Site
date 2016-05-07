@@ -5,7 +5,7 @@ $(document).ready(function(){
 var canvas = $("#canvas")[0];
 var ctx = canvas.getContext("2d");
 
-ctx.font = "10px Lato"
+
 
 
 var w = $("#canvas").width();
@@ -17,14 +17,17 @@ var cw = 10;
 var d;
 var food;
 var score;
+var game_reset;
 
 function init() {
 	d = "right";
 	create_snake();
 	create_food();
 	score = 0;
-
-
+	ctx.fillStyle = "red";
+	ctx.textAlign = "center";
+	game_reset = false;
+	ctx.font = "10px Lato"
 	//Snake movement using a timer
 	//Every 60ms
 	if(typeof game_loop != "undefined") clearInterval(game_loop);
@@ -56,8 +59,30 @@ function create_food()
 	}
 
 }
-create_food()
 
+
+function game_over()
+{
+	//When the game has ended
+	//Pause the game
+	//Display the score
+		ctx.font = "30px Lato";
+		ctx.fillStyle = "red";
+		ctx.textAlign = "center";
+		ctx.fillText("Game Over", canvas.width/2, canvas.height/2 + 20);
+		ctx.font = "15px Lato";
+		ctx.fillText("Score: " + score, canvas.width/2, canvas.height/2 -20 );
+		ctx.fillText("Press Enter to continue", canvas.width/2, canvas.height - 20);
+
+
+	//Wait for user input to restart
+		if (game_reset == true) init();
+
+}
+
+
+
+create_food();
 create_snake();
 function paint() 
 {
@@ -87,7 +112,7 @@ function paint()
 	if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx,ny,snake_array))
 		{
 			//restart game
-			init();
+			game_over();
 			return;
 		}
 
@@ -124,10 +149,10 @@ function paint()
 
 
 	//Paint the food
-	paint_cell(food.x, food.y, "#cc4444")
+	paint_cell(food.x, food.y, "red")
 	//Draw the score
 	var score_text = "Score: " + score;
-	ctx.fillText(score_text,5,h-5);
+	ctx.fillText(score_text,20,h-5);
 }
 
 //Generic paint function for cells
@@ -165,6 +190,7 @@ $(document).keydown(function(e)
 		else if(key == "38" && d != "down") d = "up";
 		else if(key == "39" && d != "left") d = "right";
 		else if(key == "40" && d != "up") d = "down";
+		else if(key == "13") game_reset = true;
 })
 
 
