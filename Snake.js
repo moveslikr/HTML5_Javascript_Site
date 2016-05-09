@@ -17,7 +17,9 @@ var cw = 10;
 var d;
 var food;
 var score;
+var highscore = 0;
 var game_reset;
+var in_game;
 
 function init() {
 	d = "right";
@@ -28,6 +30,7 @@ function init() {
 	ctx.textAlign = "center";
 	game_reset = false;
 	ctx.font = "10px Lato"
+	in_game = true;
 	//Snake movement using a timer
 	//Every 60ms
 	if(typeof game_loop != "undefined") clearInterval(game_loop);
@@ -56,7 +59,7 @@ function create_food()
 	food = {
 		x: Math.round(Math.random()*(w-cw)/cw),
 		y: Math.round(Math.random()*(h-cw)/cw),
-	}
+	};
 
 }
 
@@ -66,6 +69,7 @@ function game_over()
 	//When the game has ended
 	//Pause the game
 	//Display the score
+		in_game = false;
 		ctx.font = "30px Lato";
 		ctx.fillStyle = "red";
 		ctx.textAlign = "center";
@@ -74,7 +78,15 @@ function game_over()
 		ctx.fillText("Score: " + score, canvas.width/2, canvas.height/2 -20 );
 		ctx.fillText("Press Enter to continue", canvas.width/2, canvas.height - 20);
 
+		//if score > highscore
+		if (score > highscore) {
+			highscore = score;
+			$('#highscore').text("Highscore: " +highscore);	
+		}
 
+		
+		
+		
 	//Wait for user input to restart
 		if (game_reset == true) init();
 
@@ -186,11 +198,11 @@ $(document).keydown(function(e)
 {
 	var key = e.which;
 	//We will add another clause to prevent reverse gear
-		if(key == "37" && d != "right") d = "left";
-		else if(key == "38" && d != "down") d = "up";
-		else if(key == "39" && d != "left") d = "right";
-		else if(key == "40" && d != "up") d = "down";
-		else if(key == "13") game_reset = true;
+		if(key == "37" && d != "right" && in_game == true) d = "left";
+		else if(key == "38" && d != "down"  && in_game == true) d = "up";
+		else if(key == "39" && d != "left" && in_game == true) d = "right";
+		else if(key == "40" && d != "up" && in_game == true) d = "down";
+		else if(key == "13" && in_game == false) game_reset = true;
 })
 
 
