@@ -6,20 +6,40 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<script src="Snake.js" type="text/javascript"></script>
-	<link type="text/css" rel="stylesheet" href="Snake.css">
+	<link type="text/css" rel="stylesheet" href="Style.css">
+	<link type="text/css" rel="stylesheet" href="bootstrap.css">
+	<title>Snake</title>
 </head>
 
 
 <body>
-<h1>Snake Game</h1>
-<h2>Tom Jaggard</h2>
 
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="Snake.html">Snake</a></li>
+			<li><a href="#">Pong</a></li>
+			<li><a href="#">Breakout</a></li>
+		</ul>
 
-
- <canvas id="canvas" width="450" height="450"></canvas>
-
-<p id="highscore"></p>
-
-
+<div class="whole">
+<div class="container">
+	<div class="jumbotron" style="padding-top: 10px;
+	position: fixed;
+	top: 50%;
+	width: 600px;
+	height: 700px;
+	margin: 0 auto;
+	left: 50%;
+	margin-top: -350px;
+	margin-left: -300px;">
+		<div class="title">
+			<h1>Snake Game</h1>
+			<h2>Tom Jaggard</h2>
+		</div>
+		<canvas id="canvas" width="450" height="450"></canvas>
+	<p id="highscore"></p>
+	</div>
+</div>
+</div>
 </body>
 </html>

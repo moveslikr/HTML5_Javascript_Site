@@ -26,7 +26,7 @@ function init() {
 	create_snake();
 	create_food();
 	score = 0;
-	ctx.fillStyle = "red";
+	ctx.fillStyle = "#4CAF50";
 	ctx.textAlign = "center";
 	game_reset = false;
 	ctx.font = "10px Lato"
@@ -43,7 +43,7 @@ init();
 var snake_array; //an array of cells to make up the snake
 
 function create_snake() {
-	var length = 5; //Length of the snake
+	var length = 4; //Length of the snake
 	snake_array = [] //Create an empty array for the snake
 
 	for (var i = length - 1; i >= 0; i--) {
@@ -71,7 +71,7 @@ function game_over()
 	//Display the score
 		in_game = false;
 		ctx.font = "30px Lato";
-		ctx.fillStyle = "red";
+		ctx.fillStyle = "#4CAF50";
 		ctx.textAlign = "center";
 		ctx.fillText("Game Over", canvas.width/2, canvas.height/2 + 20);
 		ctx.font = "15px Lato";
@@ -155,7 +155,7 @@ function paint()
 	{
 		var c = snake_array[i];
 		//Paint 10px wide cells
-		paint_cell(c.x,c.y, "red")
+		paint_cell(c.x,c.y, "#4CAF50")
 		
 	}
 
@@ -198,10 +198,10 @@ $(document).keydown(function(e)
 {
 	var key = e.which;
 	//We will add another clause to prevent reverse gear
-		if(key == "37" && d != "right" && in_game == true) d = "left";
-		else if(key == "38" && d != "down"  && in_game == true) d = "up";
-		else if(key == "39" && d != "left" && in_game == true) d = "right";
-		else if(key == "40" && d != "up" && in_game == true) d = "down";
+		if(key == "65" && d != "right" && in_game == true) d = "left";
+		else if(key == "87" && d != "down"  && in_game == true) d = "up";
+		else if(key == "68" && d != "left" && in_game == true) d = "right";
+		else if(key == "83" && d != "up" && in_game == true) d = "down";
 		else if(key == "13" && in_game == false) game_reset = true;
 })
 
