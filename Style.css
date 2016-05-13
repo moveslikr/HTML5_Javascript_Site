@@ -72,3 +72,7 @@ li a:visited {
 #active a{
 	border-bottom: 3px solid #F117B4
 }
+
+#highscore {
+	padding: 5px;
+}
